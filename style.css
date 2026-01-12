@@ -1,0 +1,535 @@
+/* =========================================
+   RESET GLOBAL
+   ========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================
+   FONTS
+   ========================================= */
+@font-face {
+  font-family: "Hellghost Rough";
+  src: url("https://db.onlinewebfonts.com/t/974927adf453da2b7246dca35d6f21a4.eot");
+  src:
+    url("https://db.onlinewebfonts.com/t/974927adf453da2b7246dca35d6f21a4.eot?#iefix") format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/974927adf453da2b7246dca35d6f21a4.woff2") format("woff2"),
+    url("https://db.onlinewebfonts.com/t/974927adf453da2b7246dca35d6f21a4.woff") format("woff"),
+    url("https://db.onlinewebfonts.com/t/974927adf453da2b7246dca35d6f21a4.ttf") format("truetype"),
+    url("https://db.onlinewebfonts.com/t/974927adf453da2b7246dca35d6f21a4.svg#Hellghost Rough") format("svg");
+  /* font payante (moyen de filou) https://alitdesign.net/product/hellghost-typeface/ */
+}
+
+/* =========================================
+   VARIABLES & DESIGN TOKENS
+   ========================================= */
+:root {
+  /* Couleurs */
+  --bg-dark: #0e0e0e;
+  --text-main-color: #eee;
+  --accent-gold: #ffd700;
+  --accent-red: #550000;
+
+  --emotion-neutral: #ffffff;
+  --emotion-rage: #ff2020;
+  --emotion-extase: #ffa81d;
+  --emotion-melancolie: #4a65ff;
+  --emotion-angoisse: #58ea70;
+
+  /* Fonts */
+  --font-family-h1: "Hellghost Rough", serif;
+  --font-family-h2: "IM Fell English SC", serif;
+  --font-family-body: "IM Fell English", serif;
+
+  /* Tailles */
+  --font-size-h2: 2.4rem;
+  --font-size-h3: 1.8rem;
+  --font-size-body: 1.2rem;
+
+  /* Animation */
+  --transition-fast: 0.2s ease;
+  --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   BASE LAYOUT
+   ========================================= */
+body {
+  height: 100dvh; /* Hauteur dynamique pour iPhone 14 Pro */
+  width: 100vw;
+  overflow: hidden; /* Interdit le scroll global */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-dark);
+  color: var(--text-main-color);
+}
+
+.game-container {
+  width: 100%;
+  height: 100%;
+  max-width: 430px; /* Largeur max d'un iPhone Pro */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* (au lieu de top) */
+  background: var(--bg-dark);
+  overflow: hidden;
+}
+
+.dynamic-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+}
+
+/* =========================================
+   UTILITAIRES
+   ========================================= */
+.hidden {
+  display: none !important;
+}
+
+/* =========================================
+   TYPOGRAPHIE
+   ========================================= */
+h1,
+.game-title {
+  font-family: var(--font-family-h1);
+  font-size: 2.5rem;
+}
+
+h2,
+.screen-title {
+  font-family: var(--font-family-h2);
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-family: var(--font-family-h2);
+  font-size: 1.6rem;
+}
+
+.number {
+  font-family: var(--font-family-h2);
+  font-size: 1.6em;
+}
+
+.narrative-note {
+  font-family: var(--font-family-body);
+  font-style: italic;
+  font-size: var(--font-size-body);
+  font-weight: 400;
+  color: var(--text-main-color);
+  opacity: 0.8;
+}
+
+/* =========================================
+   COMPOSANTS : BOUTONS
+   ========================================= */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  font-family: var(--font-family-h2);
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
+  transition: var(--transition-fast);
+  color: var(--text-main-color);
+}
+
+.btn-primary,
+.btn-select-count {
+  width: auto;
+  display: inline-block;
+  background: transparent;
+  font-size: 1.3rem;
+  border: 30px solid;
+  border-image: url("assets/box.png") 33% round;
+  margin-bottom: 10px;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+  filter: brightness(1.2);
+}
+
+.btn-secondary {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.btn-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 40px;
+}
+
+/* =========================================
+   HOME SCREEN
+   ========================================= */
+.home-screen {
+  position: relative;
+}
+
+.home-screen-menu {
+  top: 80%;
+  z-index: 110;
+}
+
+.btn-new-game {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+}
+
+/* Background cover */
+.cover-bg {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+}
+
+.cover-bg-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* =========================================
+   PLAYER COUNT SCREEN
+   ========================================= */
+.player-count-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-select-container {
+  display: flex;
+}
+
+.btn-select-title {
+  margin-bottom: 40px;
+}
+
+.btn-select-count {
+  margin: 10px;
+}
+
+/* =========================================
+   SETUP ÉMOTIONS SCREEN
+   ========================================= */
+.setup-emotions-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.setup-list {
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.setup-emotion-title {
+  margin-bottom: 8px;
+  margin-top: 24px;
+  text-align: center;
+  opacity: 0.8;
+  font-family: var(--font-family-h2);
+  font-weight: 400;
+}
+
+.player-setup-row {
+  background: rgba(255, 255, 255, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-setup-number {
+  margin-top: 16px;
+  height: 50px;
+}
+
+.section-split-bar {
+  height: 10px;
+}
+
+.emotion-choices {
+  margin-top: 20px;
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.emotion-choice-card {
+  transition: var(--transition-fast);
+  filter: grayscale(0%);
+}
+
+.emotion-choice-card img {
+  width: 100%;
+  max-width: 64px;
+}
+
+.emotion-choice-card.selected {
+  filter: grayscale(0%);
+  transform: scale(1.2);
+}
+
+.emotion-choice-card.disabled {
+  opacity: 0.1;
+}
+
+.btn-start-game {
+  position: fixed;
+  bottom: 40px;
+}
+
+/* =========================================
+   COMPOSANTS : L'OEIL
+   ========================================= */
+.eye-mechanic {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 20px auto;
+}
+
+.eye-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#eye-base {
+  z-index: 1;
+}
+#eye-color-overlay {
+  z-index: 2;
+}
+#eye-pupils-layer {
+  z-index: 3;
+}
+
+.pupil-rune {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pupil-rune img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* =========================================
+   COMPOSANTS : ROUND
+   ========================================= */
+.round-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100px;
+}
+
+.first-player-info {
+  margin-bottom: 8px;
+}
+
+.round-title {
+  height: fit-content;
+  line-height: 1;
+}
+
+/* =========================================
+   COMPOSANTS : STEPPERS (SCORES)
+   ========================================= */
+.score-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.score-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0);
+}
+
+.rune-badge-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+}
+
+.rune-image-place {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rune-image-place img {
+  width: 70px;
+  height: 70px;
+  opacity: 0.95;
+}
+
+.score-badge {
+  position: absolute;
+  top: 60%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+
+  margin: 0;
+  width: auto;
+  height: auto;
+  font-size: 50px;
+  font-family: var(--font-family-h2);
+  color: var(--text-main-color);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 2px 2px 2px rgba(0, 0, 0, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.arrow-button {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-button img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transform-origin: center center;
+}
+
+/* =========================================
+   COMPOSANTS : EVENEMENTS (JSON)
+   ========================================= */
+.event-result-box {
+  width: 80%;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.event-title {
+  margin-bottom: 2rem;
+  font-family: var(--font-family-h2);
+  color: var(--accent-gold);
+  font-size: var(--font-size-h2);
+  font-weight: 400;
+  line-height: 2rem;
+}
+
+.event-description {
+  margin-bottom: 1.5rem;
+}
+
+.event-mechanics {
+  margin-top: 1.5rem;
+  font-family: var(--font-family-h2);
+  font-size: var(--font-size-body);
+  text-align: center;
+}
+
+.event-navigation-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  margin-top: 15px;
+}
+
+/* =========================================
+   MOVEMENT OVERLAY
+   ========================================= */
+.movement-content {
+  position: absolute;
+  inset: 0;
+  background: #0e0e0e;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.compass-container {
+  width: 240px;
+  height: 240px;
+  margin: 40px 0;
+  border-radius: 50%;
+  padding: 10px;
+  position: relative;
+}
+
+.compass-move,
+.compass-direction {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+}
+
+.movement-steps-left {
+  font-family: var(--font-family-h2);
+  color: var(--accent-gold);
+  font-size: 1.4rem;
+}
