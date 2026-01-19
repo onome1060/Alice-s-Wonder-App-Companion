@@ -656,20 +656,26 @@ const UI = {
     overlay.className = 'movement-overlay';
     overlay.innerHTML = `
       <div class="movement-content">
-        <h2 class="screen-title">Déplacement d'Alice</h2>
+        <div class="screen-title compass-title">
+          <h2 class="">Déplacement d'Alice</h2>
+        </div>
 
-        <p class="narrative-note compass-ui-text">Appuyez pour découvrir<br>la direction que prend Alice</p>
+        <div class="narrative-note compass-ui-text">
+          <p>Appuyez pour découvrir<br>la direction que prend Alice</p>
+        </div>
 
         <div class="compass-container">
           <img class="compass-move" src="assets/movement.png" id="movement-arrow">
           <img class="compass-direction" src="assets/movement-direction.png" id="movement-direction">
         </div>
-
-        <p class="movement-steps-left" style="color: ${activeColor};">
-          Alice se déplace<br>encore
-          <span class="number" style="color: var(--text-main-color);">${GameState.aliceMoveCount}</span> 
-          fois
-        </p>
+        
+        <div class="movement-steps-left">
+          <p style="color: ${activeColor};">
+            Alice se déplace<br>encore
+            <span class="number" style="color: var(--text-main-color);">${GameState.aliceMoveCount}</span> 
+            fois
+          </p>
+        </div>
       </div>
     `;
     // <span style="color: ${activeColor};"></span>
@@ -699,7 +705,7 @@ const UI = {
 
             if (GameState.aliceMoveCount === 0) {
               stepsText.style.display = "none";
-              overlay.querySelector('.narrative-note').innerHTML = "Appuyez pour fermer<br>Alice a fini de se déplacer";
+              overlay.querySelector('.narrative-note').innerHTML = "Alice a fini de se déplacer<br>Appuyez pour fermer";
             }
           }
         });
