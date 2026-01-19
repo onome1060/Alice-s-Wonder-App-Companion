@@ -3,7 +3,7 @@
     {
       "title": "Excès autodestructeur",
       "mechanic": {
-          "description": "Alice détruit la tuile sur laquelle elle se trouve puis se déplace aléatoirement.",
+          "description": "Alice détruit la tuile où elle se trouve, puis se déplace de <span class='number'>1</span> tuile.",
           "movement": {
               "bool": true,
               "number":1
@@ -14,7 +14,7 @@
     {
       "title": "Escalade violente",
       "mechanic": {
-          "description": "Pendant la prochaine manche, chaque joueur peut détruire une tuile pour la remplacer par une tuile qu’il pose. Chaque fois que cette action se résout, Alice rejoint la tuile nouvellement placée.",
+          "description": "À votre tour, vous pouvez détruire une tuile pour la remplacer par l'une des vôtres ; Alice rejoint alors cette tuile.",
           "movement": {
               "bool": false,
               "number":0
@@ -25,7 +25,7 @@
     {
       "title": "Effondrement cathartique",
       "mechanic": {
-          "description": "Alice détruit toutes les tuiles au bord du plateau et revient sur la case centrale.",
+          "description": "Alice détruit toutes les tuiles en bordure du plateau, puis rejoint la tuile centrale.",
           "movement": {
               "bool": false,
               "number":0
@@ -36,7 +36,7 @@
     {
       "title": "Impulsion furieuse",
       "mechanic": {
-          "description": "Alice se déplace aléatoirement deux fois. Ensuite, le joueur avec le moins de point peut détruire une tuile adjacente à elle.",
+          "description": "Alice se déplace de <span class='number'>2</span> tuiles, puis le joueur ayant le moins de points peut détruire une tuile adjacente à Alice.",
           "movement": {
               "bool": true,
               "number":2
@@ -47,7 +47,7 @@
     {
       "title": "Colère confuse",
       "mechanic": {
-          "description": "Alice se déplace aléatoirement. Chaque joueur doit jeter une de ses tuiles humeurs encore en réserve dans le sachet de tuiles.",
+          "description": "Alice se déplace de <span class='number'>1</span> tuile, puis chaque joueur doit se défausser d’une tuile humeur.",
           "movement": {
               "bool": true,
               "number":1
@@ -65,7 +65,7 @@
     {
       "title": "Sursaut joyeux",
       "mechanic": {
-          "description": "Alice se déplace aléatoirement et pose un jeton bonus sur la case où elle arrive.",
+          "description": "Alice se déplace de <span class='number'>1</span> tuile ; placez <span class='number'>1</span> jeton bonus sur sa tuile d'arrivée.",
           "movement": {
               "bool": true,
               "number":1
@@ -76,7 +76,7 @@
     {
       "title": "Euphorie vivifiante",
       "mechanic": {
-          "description": "Alice se déplace aléatoirement 4 fois. Chaque case parcourue par Alice et celle où elle s’arrête gagne 1 jeton bonus.",
+          "description": "Alice se déplace de <span class='number'>4</span> tuiles ; placez <span class='number'>1</span> jeton bonus sur sa tuile d’arrivée et sur chaque tuile traversée.",
           "movement": {
               "bool": true,
               "number":4
@@ -87,7 +87,7 @@
     {
       "title": "Réalisation affranchie",
       "mechanic": {
-          "description": "En commençant par le joueur plus faible dans l’ordre du tour, chaque joueur disposant encore d’au moins une tuile humeur spéciale dans sa réserve doit immédiatement en poser une.",
+          "description": "Chaque joueur possédant au moins <span class='number'>1</span> tuile humeur doit en poser une immédiatement, en commençant par le dernier au score.",
           "movement": {
               "bool": false,
               "number":0
@@ -98,7 +98,7 @@
     {
       "title": "Inspiration formidable",
       "mechanic": {
-          "description": "Durant la prochaine manche, chaque joueur peut poser une tuile spéciale en plus des deux tuiles qu’il a choisi dans la réserve commune.",
+          "description": "Chaque joueur peut poser <span class='number'>1</span> tuile humeur supplémentaire, en plus des <span class='number'>2</span> tuiles choisies dans la réserve.",
           "movement": {
               "bool": false,
               "number":0
@@ -109,7 +109,7 @@
     {
       "title": "Allégresse partagée",
       "mechanic": {
-          "description": "Chaque joueur peut poser une tuile présente dans la réserve commune immédiatement en commençant par le joueur actif. Alice se déplace sur la dernière tuile posée et la réserve est remélangée puis restituée.",
+          "description": "Chaque joueur peut poser <span class='number'>1</span> tuile (ordre du tour) : Alice rejoint la dernière tuile posée et la réserve est ensuite mélangée.",
           "movement": {
               "bool": false,
               "number":0
@@ -127,7 +127,7 @@
     {
       "title": "Flétrissement de Wonder",
       "mechanic": {
-          "description": "Les tuiles adjacentes à Alice sont tournées face cachée. Elle se déplace aléatoirement ensuite.",
+          "description": "Les tuiles adjacentes à Alice sont tournées face cachée, puis elle se déplace de <span class='number'>1</span> tuile.",
           "movement": {
               "bool": true,
               "number":1
@@ -138,7 +138,7 @@
     {
       "title": "Avenir incertain",
       "mechanic": {
-          "description": "Remélangez la réserve neutre pour y poser des tuiles face cachée à la place. Pour le reste de la manche les tuiles dans la réserve neutre sont toujours posées face caché. Avant de tirer le prochain évènement, révélez-les.",
+          "description": "Posez les tuiles de la réserve face cachée pour le reste de la manche ; révélez-les avant de tirer le prochain événement.",
           "movement": {
               "bool": false,
               "number":0
@@ -149,7 +149,7 @@
     {
       "title": "Acédie",
       "mechanic": {
-          "description": "Remélangez la réserve neutre pour y poser une seule tuile par emplacement. Chaque fois que la réserve neutre est restituée pendant cette manche n’y mettez qu’une seule tuile. Les joueurs ne peuvent pas poser plus d’une tuile durant cette manche. Restituez normalement la réserve neutre avant de tirer le prochain évènement.",
+          "description": "Cette manche, la réserve et la pose sont limitées à <span class='number'>1</span> seule tuile ; restituez la réserve normalement avant le prochain événement.",
           "movement": {
               "bool": false,
               "number":0
@@ -160,7 +160,7 @@
     {
       "title": "Repli sur soi",
       "mechanic": {
-          "description": "Alice retourne au centre du plateau et retourne la tuile centrale face cachée. Ensuite, si elle ne s’est pas déplacée pour revenir au centre du plateau elle se déplace aléatoirement.",
+          "description": "Alice rejoint le centre et retourne la tuile centrale face cachée ; si elle y était déjà, elle se déplace de <span class='number'>1</span> tuile.",
           "movement": {
               "bool": true,
               "number":1
@@ -171,7 +171,7 @@
     {
       "title": "Déliquescence",
       "mechanic": {
-          "description": "Durant la prochaine manche, chaque joueur peut choisir de retourner une tuile et de poser une tuile comme action du tour.",
+          "description": "Pour cette manche, une nouvelle option s'ajoute à vos choix de tour : retourner une tuile et en poser une",
           "movement": {
               "bool": false,
               "number":0
@@ -189,7 +189,7 @@
     {
       "title": "Mouvement de panique",
       "mechanic": {
-          "description": "Alice se déplace aléatoirement 3 fois. Ensuite elle pioche une tuile aléatoirement à mettre sous elle. Le joueur le plus faible oriente la nouvelle tuile.",
+          "description": "Alice se déplace <span class='number'>3</span> fois, puis placez une nouvelle tuile sous elle ; le joueur le plus faible choisit l’orientation de cette tuile.",
           "movement": {
               "bool": true,
               "number":3
@@ -200,7 +200,7 @@
     {
       "title": "Peur de la séparation",
       "mechanic": {
-          "description": "Alice se déplace avec la tuile sous elle aléatoirement.",
+          "description": "Alice se déplace <span class='number'>1</span> fois en emportant la tuile qui se trouve sous elle.",
           "movement": {
               "bool": true,
               "number":1
@@ -211,7 +211,7 @@
     {
       "title": "Avalanche de possibles",
       "mechanic": {
-          "description": "Durant cette manche, chaque joueur peut remélanger un des emplacements de la réserve neutre et le restituer avant de jouer.",
+          "description": "Avant de piocher, chaque joueur a l'option de remélanger les tuiles d'un emplacement de la réserve pour cette manche.",
           "movement": {
               "bool": false,
               "number":0
@@ -222,7 +222,7 @@
     {
       "title": "Indécision nerveuse",
       "mechanic": {
-          "description": "Alice se déplace aléatoirement 2 fois. Alice détruit la tuile sur laquelle elle arrive et le joueur le plus faible doit ensuite replacer la tuile détruite.",
+          "description": "Alice se déplace <span class='number'>2</span> fois ; elle détruit sa tuile d’arrivée, que le joueur le plus faible doit ensuite replacer.",
           "movement": {
               "bool": true,
               "number":2
@@ -233,7 +233,7 @@
     {
       "title": "Sursaut",
       "mechanic": {
-          "description": "Chaque joueur DOIT poser une tuile piochée aléatoirement dans l’ordre du tour.",
+          "description": "Dans l'ordre du tour, chaque joueur doit piocher une tuile au hasard et la poser immédiatement.",
           "movement": {
               "bool": false,
               "number":0

@@ -273,13 +273,22 @@ const UI = {
     const playerName = GameState.players[firstIdx];
     const activeColor = getActiveColor(playerName);
 
-    StartingPlayerDisplay.innerHTML = `
+    // StartingPlayerDisplay.innerHTML = `
+    //   <p>
+    //     C'est à 
+    //     <span style="color: ${activeColor}; text-shadow: 0 0 5px rgba(0,0,0,0.1);">
+    //       ${playerName.toUpperCase()}
+    //     </span> 
+    //     de débuter la manche.
+    //   </p>
+    // `;
+        StartingPlayerDisplay.innerHTML = `
       <p>
-        C'est à 
-        <b style="color: ${activeColor}; text-shadow: 0 0 5px rgba(0,0,0,0.1);">
+        <span style="color: ${activeColor};"; text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);">
           ${playerName.toUpperCase()}
-        </b> 
-        de débuter la manche.
+        </span> 
+        <br>
+        débute la manche
       </p>
     `;
 
@@ -385,16 +394,26 @@ const UI = {
 
     const activeColor = getActiveColor(emo);
 
-    GameState.currentEventHTML = `
-      <div class="event-result-box">
-        <div class="event-card">
-          <div class="event-title" style="color: ${activeColor}">${event.title}</div>
-          <div class="event-description narrative-note">"${event.description}"</div>
-          <img src="assets/section-split-bar.png" alt="" class="section-split-bar">
-          <div class="event-mechanics">${event.mechanic.description}</div>
+    //   GameState.currentEventHTML = `
+    //   <div class="event-result-box">
+    //     <div class="event-card">
+    //       <div class="event-description narrative-note">"${event.description}"</div>
+    //       <div class="event-title" style="color: ${activeColor}">${event.title}</div>
+    //       <img src="assets/section-split-bar.png" alt="" class="section-split-bar">
+    //       <div class="event-mechanics">${event.mechanic.description}</div>
+    //     </div>
+    //   </div>
+    // `;
+        GameState.currentEventHTML = `
+        <div class="event-result-box">
+          <div class="event-card">
+            <div class="event-title" style="color: ${activeColor}">${event.title}</div>
+            <div class="event-description narrative-note">${event.description}</div>
+            <img src="assets/section-split-bar.png" alt="" class="section-split-bar">
+            <div class="event-mechanics">${event.mechanic.description}</div>
+          </div>
         </div>
-      </div>
-    `;
+      `;
 
     displayZone.innerHTML = GameState.currentEventHTML;
     this.updateMainButtonUI();
@@ -630,6 +649,8 @@ const UI = {
     if (document.querySelector('.movement-overlay')) return;
 
     const container = document.querySelector('.game-container');
+    const activeColor = getActiveColor(GameState.lastWinner);
+    // GameState.lastWinner, GameState.lastEvent
 
     const overlay = document.createElement('div');
     overlay.className = 'movement-overlay';
@@ -637,23 +658,29 @@ const UI = {
       <div class="movement-content">
         <h2 class="screen-title">Déplacement d'Alice</h2>
 
+        <p class="narrative-note compass-ui-text">Appuyez pour découvrir<br>la direction que prend Alice</p>
+
         <div class="compass-container">
           <img class="compass-move" src="assets/movement.png" id="movement-arrow">
           <img class="compass-direction" src="assets/movement-direction.png" id="movement-direction">
         </div>
 
-        <p class="movement-steps-left">
-          Mouvements restants : <span class="number">${GameState.aliceMoveCount}</span>
+        <p class="movement-steps-left" style="color: ${activeColor};">
+          Alice se déplace<br>encore
+          <span class="number" style="color: var(--text-main-color);">${GameState.aliceMoveCount}</span> 
+          fois
         </p>
-
-        <p class="narrative-note">Appuyez pour pivoter</p>
       </div>
     `;
+    // <span style="color: ${activeColor};"></span>
 
     container.appendChild(overlay);
 
     const arrow = document.getElementById('movement-arrow');
-    const stepsText = overlay.querySelector('.number');
+    const stepsNumber = overlay.querySelector('.number');
+    const stepsText = overlay.querySelector('.movement-steps-left');
+
+    stepsText.style.display = "block";
 
     overlay.addEventListener('click', () => {
       if (GameState.aliceMoveCount > 0) {
@@ -666,12 +693,13 @@ const UI = {
           ease: "power2.out",
           onComplete: () => {
             GameState.aliceMoveCount--;
-            stepsText.innerText = GameState.aliceMoveCount;
+            stepsNumber.innerText = GameState.aliceMoveCount;
 
             this.updateMainButtonUI();
 
             if (GameState.aliceMoveCount === 0) {
-              overlay.querySelector('.narrative-note').innerText = "Alice a terminé. Cliquez pour fermer.";
+              stepsText.style.display = "none";
+              overlay.querySelector('.narrative-note').innerHTML = "Appuyez pour fermer<br>Alice a fini de se déplacer";
             }
           }
         });

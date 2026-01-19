@@ -42,24 +42,26 @@
   --font-family-h1: "Hellghost Rough", serif;
   --font-family-h2: "IM Fell English SC", serif;
   --font-family-body: "IM Fell English", serif;
+  /* --font-family-uitxt: "Spectral", serif; */
+  --font-family-uitxt: "IM Fell English", serif;
 
   /* Tailles */
   --font-size-h2: 2.4rem;
   --font-size-h3: 1.8rem;
   --font-size-body: 1.2rem;
+  --font-size-ui-helper: 1rem;
 
   /* Animation */
   --transition-fast: 0.2s ease;
   --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 /* =========================================
    BASE LAYOUT
    ========================================= */
 body {
-  height: 100dvh; /* Hauteur dynamique pour iPhone 14 Pro */
+  height: 100dvh;
   width: 100vw;
-  overflow: hidden; /* Interdit le scroll global */
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,20 +72,24 @@ body {
 .game-container {
   width: 100%;
   height: 100%;
-  max-width: 430px; /* Largeur max d'un iPhone Pro */
+  max-width: 430px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 .screen {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* (au lieu de top) */
   background: var(--bg-dark);
   overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr 100px; 
+  grid-template-areas: 
+      "header"
+      "content"
+      "btn-footer";
+  min-height: 100dvh;
 }
 
 .dynamic-area {
@@ -91,7 +97,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 400px;
+  height: 100%;
 }
 
 /* =========================================
@@ -135,6 +141,12 @@ h3 {
   opacity: 0.8;
 }
 
+.ui-text {
+  font-family: var(--font-family-uitxt);
+  font-size: 1rem;
+  opacity: .6;
+}
+
 /* =========================================
    COMPOSANTS : BOUTONS
    ========================================= */
@@ -160,9 +172,9 @@ button {
   display: inline-block;
   background: transparent;
   font-size: 1.3rem;
-  border: 30px solid;
+  border: 20px solid;
   border-image: url("assets/box.png") 33% round;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .btn-primary:active {
@@ -176,38 +188,27 @@ button {
   text-decoration: underline;
 }
 
-.btn-main-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 40px;
-}
-
 /* =========================================
    HOME SCREEN
    ========================================= */
-.home-screen {
-  position: relative;
+
+.home-screen-menu{
+  grid-area: btn-footer;
+}
+.cover-bg {
+  grid-area: content;
 }
 
 .home-screen-menu {
-  top: 80%;
-  z-index: 110;
-}
-
-.btn-new-game {
-  position: fixed;
-  left: 50%;
-  bottom: 100px;
-  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Background cover */
 .cover-bg {
   position: relative;
-  width: 100%;
-  height: 100vh;
+  height: 100%;
   z-index: 100;
 }
 
@@ -226,6 +227,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .btn-select-container {
@@ -243,17 +245,27 @@ button {
 /* =========================================
    SETUP ÉMOTIONS SCREEN
    ========================================= */
-.setup-emotions-screen {
+
+.setup-emotion-title { grid-area: header;}
+
+.setup-list { grid-area: content;}
+
+.btn-container { grid-area: btn-footer;}
+
+.btn-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.setup-list {
-  height: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.setup-emotions-screen {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      1fr   /* header */ 
+      6fr   /* emotion choise */
+      1fr   /* buttons */;
+    min-height: 100dvh;
 }
 
 .setup-emotion-title {
@@ -265,6 +277,14 @@ button {
   font-weight: 400;
 }
 
+.setup-list {
+  /* min-height: 600px; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .player-setup-row {
   background: rgba(255, 255, 255, 0);
   display: flex;
@@ -274,7 +294,7 @@ button {
 }
 
 .player-setup-number {
-  margin-top: 16px;
+  /* margin-top: 16px; */
   height: 50px;
 }
 
@@ -283,7 +303,7 @@ button {
 }
 
 .emotion-choices {
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-bottom: 16px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -310,10 +330,109 @@ button {
 }
 
 .btn-start-game {
-  position: fixed;
-  bottom: 40px;
+  /* position: fixed;
+  bottom: 40px; */
+  width: auto;
+}
+@media (max-width: 767px) {
+  .setup-list {
+    /* min-height: 0; */
+  }
+  .setup-emotion-title {
+    margin-bottom: 8px;
+    margin-top: 12px;
+    font-size: 1.4rem;
+  }
+  .player-setup-number {
+    /* margin-top: 4px; */
+    margin-bottom: 12px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+  .emotion-choices {
+    /* margin-top: 10px; */
+    margin-bottom: 8px;
+    gap: 6px;
+  }
+  .emotion-choice-card img {
+    width: 100%;
+    max-width: 55px;
+  }
+  .section-split-bar {
+    height: 6px;
+  }
+  .btn-start-game {
+    /* bottom: 20px; */
+  }
+
+}
+/* =========================================
+   COMPOSANTS : ROUND
+   ========================================= */
+
+.screen.round-screen{
+  /* display: flex;
+  flex-direction: column; */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      4fr   /* eye */ 
+      1fr   /* header event*/
+      8fr    /* contenu principal (flexible) */
+      100px;  /* actions / bouton */
+    grid-template-areas: "eye" "header" "content" "btn-footer";
+    /* min-height: 100dvh; */
+    height: 100dvh;
+    width: 100%;
+
 }
 
+.eye-mechanic { grid-area: eye;}
+.round-header { grid-area: header;}
+.dynamic-area { grid-area: content;}
+.btn-main-container { grid-area: btn-footer;}
+
+.round-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  
+}
+
+.first-player-info {
+  margin-bottom: 8px;
+  /* font-family: var(--font-family-body);
+  font-style: normal;
+  font-size: var(--font-size-ui-helper); */
+  text-shadow: #eee;
+  color: #eeeeee9b;
+  opacity: .6;
+}
+.first-player-info p {
+  text-align: center;
+  line-height: 80%;
+}
+
+.round-title {
+  height: fit-content;
+  line-height: 1;
+  font-family: var(--font-family-h2);
+  font-size: 3rem;
+}
+
+.btn-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  .round-title {
+    font-size: 2rem;
+  }
+}
 /* =========================================
    COMPOSANTS : L'OEIL
    ========================================= */
@@ -360,33 +479,24 @@ button {
   height: 100%;
   object-fit: contain;
 }
-
-/* =========================================
-   COMPOSANTS : ROUND
-   ========================================= */
-.round-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100px;
+@media (max-width: 767px) {
+  .eye-mechanic {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+  }
 }
-
-.first-player-info {
-  margin-bottom: 8px;
-}
-
-.round-title {
-  height: fit-content;
-  line-height: 1;
-}
-
 /* =========================================
    COMPOSANTS : STEPPERS (SCORES)
    ========================================= */
 .score-inputs-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+
+  display: grid;
+  grid-template-columns: 1fr;   /* 1 seule colonne */
+  grid-auto-rows: 1fr;          /* chaque joueur prend la même hauteur */
+  row-gap: 1%;                /* espace entre les rows */
+
 }
 
 .score-stepper {
@@ -394,6 +504,7 @@ button {
   align-items: center;
   justify-content: space-around;
   background: rgba(255, 255, 255, 0);
+  height: fit-content;
 }
 
 .rune-badge-container {
@@ -453,6 +564,17 @@ button {
   transform-origin: center center;
 }
 
+@media (max-width: 767px) {
+  .rune-badge-container {
+      max-width: 100px;
+      max-height: 100px;
+  }
+  .rune-image-place img {
+    max-width: 100px;
+    max-height: 100px;
+    opacity: 0.95;
+  }
+}
 /* =========================================
    COMPOSANTS : EVENEMENTS (JSON)
    ========================================= */
@@ -470,9 +592,8 @@ button {
 .event-title {
   margin-bottom: 2rem;
   font-family: var(--font-family-h2);
-  color: var(--accent-gold);
-  font-size: var(--font-size-h2);
-  font-weight: 400;
+  font-size: 2.4rem;
+  font-weight: 800;
   line-height: 2rem;
 }
 
@@ -482,9 +603,11 @@ button {
 
 .event-mechanics {
   margin-top: 1.5rem;
-  font-family: var(--font-family-h2);
+  font-family: var(--font-family-uitxt);
+  font-weight: 200;
   font-size: var(--font-size-body);
   text-align: center;
+  font-weight: 100;
 }
 
 .event-navigation-tools {
@@ -495,6 +618,17 @@ button {
   margin-top: 15px;
 }
 
+@media (max-width: 767px) {
+  .event-title {
+    margin-bottom: 1.4rem;
+    font-size: 1.8rem;
+    line-height: 1.4rem;
+  }
+  .event-description {
+    line-height: 1.2rem;
+  }
+
+}
 /* =========================================
    MOVEMENT OVERLAY
    ========================================= */
@@ -503,22 +637,60 @@ button {
   inset: 0;
   background: #0e0e0e;
   z-index: 999;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   text-align: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 
+  1fr 
+  1fr 
+  5fr 
+  2fr;
+  grid-template-areas: 
+  "header" "ui-txt" "compass" "steps-left";
+
+
+
+
+}
+.screen-title{
+  grid-area: header;
+}
+.compass-ui-text{
+  grid-area: ui-txt;
+}
+.compass-container{
+  grid-area: compass;
+}
+.movement-steps-left{
+  grid-area: steps-left;
 }
 
+.screen-title {
+  align-items: end;
+}
 .compass-container {
-  width: 240px;
-  height: 240px;
-  margin: 40px 0;
+  /* width: 240px;
+  height: 240px; */
+  /* margin: 40px 0; */
   border-radius: 50%;
   padding: 10px;
   position: relative;
+  justify-self: center;
+  height: 100%;
+  width: 100%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
 }
 
+.compass-ui-text {
+  font-family: var(--font-family-uitxt);
+  font-size: var(--font-size-ui-helper);
+}
 .compass-move,
 .compass-direction {
   position: absolute;
@@ -530,6 +702,9 @@ button {
 
 .movement-steps-left {
   font-family: var(--font-family-h2);
-  color: var(--accent-gold);
+  color: var(--text-main-color);
   font-size: 1.4rem;
+}
+@media (max-width: 767px) {
+
 }

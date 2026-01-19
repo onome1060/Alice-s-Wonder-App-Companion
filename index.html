@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Alice's Wonder - Compagnon</title>
-    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
     <link rel="stylesheet" href="style.css">
@@ -43,13 +47,15 @@
         <section id="setup-emotions-screen" class="screen setup-emotions-screen hidden">
             <h2 class="setup-emotion-title">Quelle émotion<br>incarnerez-vous ?</h2>
             <div id="players-setup-list" class="setup-list"></div>
-            <button id="btn-start-game" class="btn-primary btn-start-game">Commencer la Partie</button>
+            <div class="btn-container">
+                <button id="btn-start-game" class="btn-primary btn-start-game">Commencer la Partie</button>
+            </div>
         </section>
 
         <!--Display manche en cours -->
         <section id="round-screen" class="screen round-screen hidden">
 
-            <div id="main-eye-container" class="eye-mechanic">
+            <div id="main-eye-container" class="eye-mechanic eye-container">
                 <img id="eye-base" src="assets/eye.png" class="eye-layer" alt="Oeil Neutre">
                 <img id="eye-color-overlay" src="" class="eye-layer" alt="" style="opacity: 0;">
                 <div id="eye-pupils-layer" class="eye-layer">
