@@ -440,7 +440,7 @@ const UI = {
     // 4) Manches 1..4 : tirage gagnant (ton comportement actuel)
     const roundWinner = Math.random() < 0.75 ? ranking[0] : (ranking[1] || ranking[0]);
 
-    // --- MODIFICATION ICI ---
+        // --- MODIFICATION ICI ---
     // On filtre pour ne garder que les tuiles qui n'ont pas isFinal: true
     const eventDispo = GameState.database[roundWinner].filter(e => !e.isFinal);
 
@@ -452,6 +452,8 @@ const UI = {
     const realIndex = GameState.database[roundWinner].indexOf(event);
     GameState.database[roundWinner].splice(realIndex, 1);
     // -------------------------
+
+    const winner = roundWinner;
 
     // Cibles
     const pupilLayer = document.getElementById('eye-pupils-layer');
