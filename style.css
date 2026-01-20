@@ -132,6 +132,7 @@ h3 {
 .number {
   font-family: var(--font-family-h2);
   font-size: 1.6em;
+  line-height: 0;
 }
 
 .narrative-note {
@@ -159,6 +160,7 @@ button {
   margin: 0;
 
   font-family: var(--font-family-h2);
+  font-weight: 800;
   font-size: 1.2rem;
   cursor: pointer;
   outline: none;
@@ -176,7 +178,6 @@ button {
   font-size: 1.3rem;
   border: 20px solid;
   border-image: url("assets/box.png") 33% round;
-  /* margin-bottom: 10px; */
 }
 
 .btn-primary:active {
